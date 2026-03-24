@@ -2,6 +2,10 @@
 
 This repository contains the code used for developing convolutional neural network (CNN) models for automated classification of antinuclear antibody (ANA) indirect immunofluorescence (IIF) images.
 
+Two versions of the models are provided:
+- Original (used in manuscript, now legacy)
+- Updated (TensorFlow-native implementation without TF Hub)
+
 The models were trained using transfer learning on locally generated HEp-2 IIF images as part of routine clinical diagnostics.
 
 ---
@@ -26,7 +30,9 @@ Two classification tasks are implemented:
      * nuclear dots (nds)
      * nucleolar (nuc)
 
-Both models use a pre-trained **EfficientNetV2-XL (ImageNet-21k-ft1k)** backbone as a fixed feature extractor.
+Original models use a pre-trained **EfficientNetV2-XL (ImageNet-21k-ft1k)** backbone as a fixed feature extractor.
+
+The updated models use a pre-trained **EfficientNetV2-L (ImageNet)** backbone as a fixed feature extractor.
 
 ---
 
@@ -34,9 +40,11 @@ Both models use a pre-trained **EfficientNetV2-XL (ImageNet-21k-ft1k)** backbone
 
 ```
 .
-├── binary_model.py        # Binary ANA classification
-├── multiclass_model.py    # ANA pattern classification
-├── requirements.txt       # Python dependencies
+├── binary_model__efficientnetv2l.py        # Binary ANA classification
+├── binary_model_original.py                # Binary ANA classification
+├── multiclass_model_efficientnetv2l.py     # ANA pattern classification
+├── multiclass_model_original.py            # ANA pattern classification
+├── requirements.txt                        # Python dependencies
 └── README.md
 ```
 
@@ -44,7 +52,7 @@ Both models use a pre-trained **EfficientNetV2-XL (ImageNet-21k-ft1k)** backbone
 
 ## Requirements
 
-The code was developed and tested using:
+The code for the original models were developed and tested using:
 
 * Python 3.10+
 * TensorFlow 2.15
@@ -78,7 +86,7 @@ dataset/
 
 ## Model Description
 
-Both models follow the same general architecture:
+The original models follow the same general architecture:
 
 * Pre-trained EfficientNetV2-XL feature extractor (frozen)
 * Dropout (0.2)
